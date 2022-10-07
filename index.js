@@ -12,7 +12,7 @@ app.use((req, res, next) => {
     console.log(req.url)
     // Check Authorization header
     const headers = JSON.parse(JSON.stringify(req.headers))
-    if (headers.Authorization !== cfg.auth) {
+    if (headers.authorization !== cfg.auth) {
         console.log('Access denied')
         res.json({error: 'not found'})
         return
