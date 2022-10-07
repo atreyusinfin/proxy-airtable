@@ -15,6 +15,7 @@ app.use((req, res, next) => {
     if (headers.Authorization !== cfg.auth) {
         console.log('Access denied')
         res.json({error: 'not found'})
+        return
     }
 
     res.append('Access-Control-Allow-Origin', ['*']);
