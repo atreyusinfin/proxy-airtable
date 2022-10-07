@@ -18,7 +18,7 @@ app.use('/api/v1/sites/', v1)
 app.use((req, res) => { res.json({error: 'not found'}) })
 
 // start server
-app.listen(cfg.port, () => { console.log('alive') })
+app.listen(cfg.port, () => { console.log('alive on port', cfg.port) })
 
 // eport defaults
 export default app
