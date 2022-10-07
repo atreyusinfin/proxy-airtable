@@ -30,7 +30,6 @@ const formattingTower = (tower) => {
 
 const addresses = (parts) => {
 
-    console.log(parts, 'parts')
     const {
         bdSite,
         leadsSite,
