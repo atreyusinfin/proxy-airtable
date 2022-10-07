@@ -1,8 +1,9 @@
 import express from 'express'
 import v1 from './routes/v1.js'
+import {env} from 'node:process'
 
 const cfg = {
-    port: 4321
+    port: env.PORT || 4321
 }
 
 const app = express()
