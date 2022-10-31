@@ -1,5 +1,5 @@
-import repository from '../repositories/addresses.js'
-import view from '../views/addresses.js'
+const repository = require('../repositories/addresses.js')
+const view = require('../views/addresses.js')
 
 const addresses = ((repository) => {
     // Expand models
@@ -45,4 +45,4 @@ const addresses = ((repository) => {
     }
 })(repository)
 
-export default addresses
+module.exports = addresses

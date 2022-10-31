@@ -1,6 +1,6 @@
-import express from 'express'
-import v1 from './routes/v1.js'
-import {env} from 'node:process'
+const express = require('express')
+const v1 = require('./routes/v1.js')
+const env = require('node:process').env
 
 const cfg = {
     port: env.PORT || 4321,
@@ -27,7 +27,8 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/api/v1/sites/', v1)
+app.use(express.json())
+app.use('/api/v1/', v1)
 
 // 404 error
 app.use((req, res) => { res.json({error: 'not found'}) })
@@ -36,4 +37,4 @@ app.use((req, res) => { res.json({error: 'not found'}) })
 app.listen(cfg.port, () => { console.log('alive on port', cfg.port) })
 
 // eport defaults
-export default app
+module.exports = app

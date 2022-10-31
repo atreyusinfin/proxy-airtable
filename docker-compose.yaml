@@ -1,0 +1,24 @@
+version: '3'
+services:
+  growth_api_dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: growth_api_dev
+    env_file: .env
+    tty: true
+    ports:
+      - "4321:8080"
+    volumes:
+      - ./src/:/usr/src/app
+  growth_api_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: growth_api_test
+    env_file: .env
+    tty: true
+    ports:
+      - "4321:8080"
+    volumes:
+      - ./src/:/usr/src/app

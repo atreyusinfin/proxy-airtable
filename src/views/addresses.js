@@ -54,4 +54,4 @@ const addresses = (parts) => {
     return all.pop()
 }
 
-export default addresses
+module.exports = addresses

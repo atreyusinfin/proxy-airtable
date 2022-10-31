@@ -1,16 +1,11 @@
-import sdk from 'airtable'
-import {env} from 'node:process'
+const sdk = require('airtable')
+const cfg = require('../config/config.js')
 
-const base = env.BASE_LEADS || ''
-
-if (base === '') {
-    throw new Error('BASE_LEADS env is required')
-}
-
-const site = ((sdk, base) => {
+const site = ((sdk, cfg) => {
     // set up table values
+    const base = cfg.get('BASE_LEADS')
     const tableName = 'sites'
-    const table = new sdk().base(base)(tableName)
+    const table = new sdk.base(base)(tableName)
 
     // default values select method
     const select = {
@@ -29,7 +24,7 @@ const site = ((sdk, base) => {
             const _default = { code: code }
 
             // set the filter formula
-            select.filterByFormula= `IF(somos_code = "${code}", 1, 0)`
+            select.filterByFormula = `IF(somos_code = "${code}", 1, 0)`
             
             try {
                 const records = []
@@ -48,6 +43,6 @@ const site = ((sdk, base) => {
             }
         }
     }
-})(sdk, base);
+})(sdk, cfg);
 
-export default site
+module.exports = site

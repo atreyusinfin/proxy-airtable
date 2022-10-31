@@ -4,16 +4,18 @@
   "description": "",
   "private": true,
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "unit-test": "mocha --recursive ./test/unit/*.test.js",
+    "auto-unit-test": "nodemon --exec 'npm run unit-test' || true"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "mocha": "^10.0.0",
+    "mockery": "^2.1.0",
     "nodemon": "^2.0.20"
   },
   "dependencies": {

@@ -1,34 +1,22 @@
-import sdk from 'airtable'
-import {env} from 'node:process'
+const sdk = require('airtable')
+const cfg = require('../config/config.js')
 
-const base = env.BASE_MK || ''
-
-if (base === '') {
-    throw new Error('BASE_MK env is required')
-}
-
-
-const site = ((sdk, base) => {
+const site = ((sdk, cfg) => {
     // set up table values
-    const tableName = 'Site [Sync]'
-    const table = new sdk().base(base)(tableName)
+
+    const base = cfg.get('BASE_MK')
+    const tableName = 'Torre [Sync]'
+    const table = new sdk.base(base)(tableName)
 
     // default values select method
     const select = {
         // maxRecords: 1,
         fields: [
             'Name',
-            'site_name',
-            'somos_code',
-            'Estrato',
-            'Ciudad',
-            'Barrio',
-            'status',
-            'address',
-            'ciudad_barrio',
-            'record_BuildingDeployment',
-            'recordId (from torres)',
-            'record_id_tower_markII',
+            'Torre',
+            'Estado',
+            'recordId',
+            'record_id_tower_mark',
         ]
     }
     
@@ -37,7 +25,7 @@ const site = ((sdk, base) => {
             const _default = { id: id }
 
             // set the filter formula
-            select.filterByFormula= `IF({record_BuildingDeployment} = "${id}", 1, 0)`
+            select.filterByFormula= `IF({Torre_id_from_site_mark_2} = "${id}", 1, 0)`
             
             try {
                 const records = []
@@ -56,6 +44,6 @@ const site = ((sdk, base) => {
             }
         }
     }
-})(sdk, base);
+})(sdk, cfg);
 
-export default site
+module.exports = site
