@@ -21,7 +21,7 @@ app.use((req, res, next) => {
     // }
 
     res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Methods', 'GET,PATCH,POST');
     res.append('Access-Control-Allow-Headers', 'Content-Type');
     res.append('Content-Type', 'application/json');
     next()
@@ -31,7 +31,7 @@ app.use(express.json())
 app.use('/api/v1/', v1)
 
 // 404 error
-app.use((req, res) => { res.json({error: 'not found'}) })
+app.use((req, res) => { res.status(404).json({error: 'not found'}) })
 
 // start server
 app.listen(cfg.port, () => { console.log('alive on port', cfg.port) })

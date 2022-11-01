@@ -15,8 +15,6 @@ const site = ((sdk, cfg) => {
 
     return {
         create: async (lead) => {
-            delete lead._lead_id // just in case
-
             const obj = [{ fields: lead }]
             const _call = promisify(table.create)
 
@@ -40,6 +38,19 @@ const site = ((sdk, cfg) => {
                 })
 
                 return records.map(r => { return {...r.fields} })
+            } catch(e) {
+                console.log(e, 'error')
+                throw `Airtable error`
+            }
+        },
+        update: async (id, lead) => {
+            const obj = [{ id: id, fields: lead }]
+            const _call = promisify(table.update)
+
+            try {
+                const response = await _call(obj)
+                console.log(response, 'air table response')
+                return response.map(r => r.getId()).pop()
             } catch(e) {
                 console.log(e, 'error')
                 throw `Airtable error`
