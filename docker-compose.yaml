@@ -20,5 +20,3 @@ services:
     tty: true
     ports:
       - "4321:8080"
-    volumes:
-      - ./src/:/usr/src/app

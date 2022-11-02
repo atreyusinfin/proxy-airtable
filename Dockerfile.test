@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 COPY ./src/package*.json ./
 
 # If you are building your code for production
-Run npm ci --only=production
+RUN npm ci --omit=dev 
 
 # Bundle app source
 COPY src/ .
