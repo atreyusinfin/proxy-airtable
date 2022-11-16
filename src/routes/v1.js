@@ -1,12 +1,50 @@
 const Router = require('express')
 const addresses = require('../usecases/addresses.js')
 const lead = require('../usecases/lead.js')
+const promotors = require('../usecases/promotors.js')
+const campaigns = require('../usecases/campaigns.js')
 
 const v1 = Router()
 
 v1.get('/sites/address/:recordId', async (req, res, next) => {
     const site = await addresses.getById(req.params.recordId)
     res.json(site)
+})
+
+v1.get('/leads/promotors/:promotorId?', async (req, res, next) => {
+    try {
+        const promotorId = req.params.promotorId || ''
+        let list = []
+        list = await promotors.getById(promotorId)
+        res.json(list)
+    } catch (e) {
+        try {
+            error = JSON.parse(e)
+            code = error.code || 500
+            delete error.code
+        } catch(j) {
+            error = {ack: 'fail', error: 'Internar Server Error'}
+        }
+        res.status(code).json(error)
+    }
+})
+
+v1.get('/leads/campaigns/:campaignId?', async (req, res, next) => {
+    try {
+        const campaignId = req.params.campaignId || ''
+        let list = []
+        list = await campaigns.getById(campaignId)
+        res.json(list)
+    } catch (e) {
+        try {
+            error = JSON.parse(e)
+            code = error.code || 500
+            delete error.code
+        } catch(j) {
+            error = {ack: 'fail', error: 'Internar Server Error'}
+        }
+        res.status(code).json(error)
+    }
 })
 
 v1.post('/leads', async (req, res, next) => {

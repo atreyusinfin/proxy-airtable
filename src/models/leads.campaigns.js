@@ -5,27 +5,19 @@ const promisify = require('util').promisify
 const site = ((sdk, cfg) => {
     // set up table values
     const base = cfg.get('BASE_LEADS')
-    const tableName = 'leads'
+    const tableName = 'campaigns'
     const table = new sdk.base(base)(tableName)
 
     // default values select method
     const select = {
+        fields : [
+            'name',
+            'campaignsID'
+        ]
         // maxRecords: 1,
     }
 
     return {
-        create: async (lead) => {
-            const obj = [{ fields: lead }]
-            const _call = promisify(table.create)
-
-            try {
-                const response = await _call(obj)
-                return response.map(r => r.getId()).pop()
-            } catch(e) {
-                console.log(e, 'error')
-                throw `Airtable error`
-            }
-        },
         find: async (criteria = '') => {
             select.filterByFormula = criteria
 
@@ -38,19 +30,6 @@ const site = ((sdk, cfg) => {
                 })
 
                 return records.map(r => { return {...r.fields} })
-            } catch(e) {
-                console.log(e, 'error')
-                throw `Airtable error`
-            }
-        },
-        update: async (id, lead) => {
-            const obj = [{ id: id, fields: lead }]
-            const _call = promisify(table.update)
-
-            try {
-                const response = await _call(obj)
-                console.log(response, 'air table response')
-                return response.map(r => r.getId()).pop()
             } catch(e) {
                 console.log(e, 'error')
                 throw `Airtable error`

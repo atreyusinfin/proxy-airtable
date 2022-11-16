@@ -9,16 +9,7 @@ const cfg = {
 
 const app = express()
 app.use((req, res, next) => {
-    console.log(req.url)
-    // Check Authorization header
-    // const headers = JSON.parse(JSON.stringify(req.headers))
-    // console.log('On request:', headers.authorization)
-    // console.log('On env:', cfg.auth)
-    // if (headers.authorization !== cfg.auth) {
-        // console.log('Access denied')
-        // res.json({error: 'not found'})
-        // return
-    // }
+    console.log(req.method, ' ', req.url)
 
     res.append('Access-Control-Allow-Origin', ['*']);
     res.append('Access-Control-Allow-Methods', 'GET,PATCH,POST');

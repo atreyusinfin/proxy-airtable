@@ -1,7 +1,5 @@
 const repository = require('../repositories/leads.js')
 
-// test id recMRhaZCRAsX3cO4
-
 const NewLead = ((repository) => {
     const lead = {
         adapter,
