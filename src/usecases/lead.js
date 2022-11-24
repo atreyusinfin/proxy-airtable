@@ -9,19 +9,18 @@ const NewLead = ((repository) => {
     } = repository
 
     const fieldsList =  [
-        "Name", "Created", "site", "somos_code (from site)",
-        "state_stepper (from Site)", "site_name", "first_name", "last_name",
-        "country_code", "phone", "email", "torre",
-        "apto", "extra_speed", "extra_router", "document_type",
-        "document_number", "site_state_at_submit", "form_sectores", "direccion",
-        "data_source", "utm_source", "utm_medium", "utm_campaign",
-        "utm_term", "utm_content", "utm_message", "utm_page",
-        "utm_format", "utm_channel", "formulario", "codigo_referidos",
-        "attributed_to", "infobooth", "Sectores (from building)", "lead_status",
-        "reminders", "lead_id", "new_site", "booking_installation",
-        "vendedor", "notes", "Tags", "last_modified_time_lead_status",
-        "delayed_date", "building_type", "building_size", "installation_date",
-        "site_record_id", "last_reminder", "add_site_to_lead", "Hubspot"
+        'Name', 'Created', 'site', 'somos_code (from site)', 'state_stepper (from Site)', 
+        'site_name', 'first_name', 'last_name', 'country_code', 'phone', 'email', 'torre', 
+        'apto', 'extra_speed', 'tv_package', 'document_type', 'document_number', 
+        'site_state_at_submit', 'form_sectores', 'direccion', 'data_source', 'utm_source',
+        'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utm_message', 'utm_page', 
+        'utm_format', 'utm_channel', 'formulario', 'codigo_referidos', 'attributed_to', 
+        'campaign', 'infobooth', 'Sectores (from building)', 'lead_status', 'reminders', 
+        'lead_id', 'new_site', 'booking_installation', 'vendedor', 'notes', 'Tags', 
+        'last_modified_time_lead_status', 'delayed_date', 'building_type', 
+        'building_size', 'Hubspot', 'installation_date', 'extra_router', 'site_record_id', 
+        'last_reminder', 'add_site_to_lead', 'zona_expansión (from site)', 'Zone', 
+        'Target (from site)', 'State (from site)', 'count_leads (from site)'
     ]
 
     const computedFields = [

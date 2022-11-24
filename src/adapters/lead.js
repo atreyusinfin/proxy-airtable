@@ -12,6 +12,8 @@ const lead = (() => {
         "buildingSize": "building_size",
         "docType": "document_type",
         "docNumber": "document_number",
+        "speed": "extra_speed",
+        "tvPackage": "tv_package",
     }
 
     const mustBeArray = [
