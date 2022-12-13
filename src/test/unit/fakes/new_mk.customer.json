@@ -1,0 +1,18 @@
+{
+    "uTorre [Sync]": "rec6DrBPn0S9g2tkX",
+    "u#_de _unidad": "101",
+    "sservicios": ["recO3TrgGfvyN38zr", "rec2aVcyuJUsnKhRE"],
+    "speriodo de prueba": "rec0H8GPjDAw5altM",
+    "sinstantaneo_tipo": "programado",
+    "cname": "Jhon",
+    "csurname": "Doe",
+    "cphone_code": 57,
+    "cdocument_type": "CC",
+    "cdocument_number": 123456789,
+    "cemail": "jhondoe@fake.web",
+    "csource": "WhatsApp",
+    "clead_id": "",
+    "caccepted_terms": true,
+    "caccepted_terms_date": "2022-11-04T23:40:52.297Z",
+    "caccepted_terms_metada": "AMOUNT: $60mil/mes, DEVICE: Mozilla/5.0 (Linux; Android 12; SM-N985F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36"
+}

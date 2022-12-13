@@ -1,23 +1,18 @@
 const sdk = require('airtable')
 const cfg = require('../config/config.js')
+const promisify = require('util').promisify
+const http = require('https')
 
-const site = ((sdk, cfg) => {
+const Units = ((sdk, cfg) => {
     // set up table values
-
     const base = cfg.get('BASE_MK')
-    const tableName = 'Torre [Sync]'
+    const tableName = 'units'
     const table = new sdk.base(base)(tableName)
 
     // default values select method
     const select = {
         // maxRecords: 1,
-        fields: [
-            'Name',
-            'Torre',
-            'Estado',
-            'recordId',
-            'record_id_tower_mark',
-        ]
+        // fields: [ ]
     }
     
     return {
@@ -25,26 +20,7 @@ const site = ((sdk, cfg) => {
             const _default = { id: id }
 
             // set the filter formula
-            select.filterByFormula= `IF({Torre_id_from_site_mark_2} = "${id}", 1, 0)`
-
-            try {
-                const records = []
-                const query = table.select(select)
-                const pages = await query.eachPage((record, next) => {
-                    records.push(...record)
-                    next()
-                })
-
-                if (records.length === 0) records.push(_default)
-
-                return records.map(r => { return {id: r.id, ...r.fields} })
-            } catch(e) {
-                console.log(e, 'error?')
-                return [_default]
-            }
-        },
-        findByCriteria: async (criteria) => {
-            select.filterByFormula= criteria
+            select.filterByFormula= `IF({record_BuildingDeployment} = "${id}", 1, 0)`
             
             try {
                 const records = []
@@ -54,10 +30,37 @@ const site = ((sdk, cfg) => {
                     next()
                 })
                 
+                if (records.length === 0) records.push(_default)
+
                 return records.map(r => { return {id: r.id, ...r.fields} })
             } catch(e) {
                 console.log(e, 'error?')
-                throw Error(e)
+                return [_default]
+            }
+        },
+        create: async (unit) => {
+            const obj = [{ fields: unit }]
+            const _call = promisify(table.create)
+
+            try {
+                const response = await _call(obj)
+                return response.map(r => r.getId()).pop()
+            } catch(e) {
+                console.log(e, 'error')
+                throw `Airtable error`
+            }
+        },
+        update: async (id, lead) => {
+            const obj = [{ id: id, fields: lead }]
+            const _call = promisify(table.update)
+
+            try {
+                const response = await _call(obj)
+                console.log(response, 'air table response')
+                return response.map(r => r.getId()).pop()
+            } catch(e) {
+                console.log(e, 'error')
+                throw `Airtable error`
             }
         },
         delete: async (id) => {
@@ -75,4 +78,4 @@ const site = ((sdk, cfg) => {
     }
 })(sdk, cfg);
 
-module.exports = site
+module.exports = Units

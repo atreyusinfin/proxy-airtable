@@ -7,3 +7,6 @@
 # 2022-11-17 16:15
  - New endpoint GET leads `/api/v1/leads/promotors/{id?}` (status code reponses: 200, 404 and 500).
  - New endpoint GET leads `/api/v1/leads/campaigns/{id?}` (status code reponses: 200, 404 and 500).
+
+# 2022-12-13 13:15
+ - New endpoint POST mk `/api/v1/mark/customers` (status code reponses: 200, 400, 409 and 500).

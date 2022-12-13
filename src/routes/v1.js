@@ -3,6 +3,7 @@ const addresses = require('../usecases/addresses.js')
 const lead = require('../usecases/lead.js')
 const promotors = require('../usecases/promotors.js')
 const campaigns = require('../usecases/campaigns.js')
+const customer = require('../usecases/customer.js')
 
 const v1 = Router()
 
@@ -80,6 +81,25 @@ v1.patch('/leads/:leadId', async (req, res, next) => {
             code = error.code || 500
             delete error.code
         } catch(j) {
+            error = {ack: 'fail', error: 'Internar Server Error'}
+        }
+        res.status(code).json(error)
+    }
+})
+
+v1.post('/mark/customers', async (req, res, next) => {
+    try {
+        const id =  await customer.create(req.body)
+        res.json({ack: 'ok', idList: id})
+    } catch (e) {
+        let error = {}
+        let code = 500
+        try {
+            error = JSON.parse(e)
+            code = error.code || 500
+            delete error.code
+        } catch(j) {
+            console.error(j, 'Error catched in router')
             error = {ack: 'fail', error: 'Internar Server Error'}
         }
         res.status(code).json(error)
